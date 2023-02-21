@@ -18,7 +18,7 @@ exports.findAllProducts = async (req, res) => {//listes id des produits
     // console.log(dataProduct)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
     res.send(dataProduct)
 }
-  exports.chooseproducts = (req, res) => {// choisir produits
+exports.chooseproducts = (req, res) => {// choisir produits
     const idProduct = req.body.idProduct;
   
     ProductChoose.countDocuments({}, (err, count) => {
@@ -52,6 +52,25 @@ exports.findAllProducts = async (req, res) => {//listes id des produits
         });
       });
     });
+};
+exports.findProductChoice = (req, res) => { //listes des produits selectionner 
+    console.log(req.body)
+    ProductChoose.find(
+      (err, productChoice) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        res.send(productChoice);
+      }
+    )
+  }
+exports.deleteProductChoice = (req, res) => {//supprimer  produits selectionner 
+    ProductChoose.deleteOne({ _id: req.params._id })
+    .then(() => {
+        res.send({ message: "Product deleted successfully" });
+    })
+    .catch((err) => {
+        res.status(500).send({ message: "Error deleting product" });
+    });
   };
-  
-  
