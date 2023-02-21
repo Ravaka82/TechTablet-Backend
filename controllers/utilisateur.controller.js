@@ -1,4 +1,4 @@
- exports.clientBoard = (req, res) => {
+  exports.clientBoard = (req, res) => {
     res.status(200).send("Contenu client");
   };
   

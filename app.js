@@ -90,6 +90,7 @@ app.get("/", (req, res) => {
 require('./routes/auth.routes')(app);
 require('./routes/utilisateur.routes')(app);
 require('./routes/role.routes')(app);
+require('./routes/product.routes')(app);
 
 // Demarrage serveur
 const PORT = process.env.PORT || 8080;
