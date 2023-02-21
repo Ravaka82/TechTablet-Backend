@@ -1,4 +1,6 @@
 const axios = require('axios');
+const db = require("../models");
+const ProductChoose = db.productChoice;
 
 exports.findAllProducts = async (req, res) => {//listes id des produits
     let dataProduct = [];
@@ -13,6 +15,43 @@ exports.findAllProducts = async (req, res) => {//listes id des produits
                 }
             }
         });       
-    console.log(dataProduct)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    // console.log(dataProduct)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
     res.send(dataProduct)
 }
+  exports.chooseproducts = (req, res) => {// choisir produits
+    const idProduct = req.body.idProduct;
+  
+    ProductChoose.countDocuments({}, (err, count) => {
+      if (err) {
+        return res.status(500).send({ message: err });
+      }
+  
+      if (count >= 10) {
+        return res.status(400).send({ message: "Maximum number of products reached" });
+      }
+  
+      ProductChoose.findOne({ idProduct: idProduct }, (err, existingProduct) => {
+        if (err) {
+          return res.status(500).send({ message: err });
+        }
+  
+        if (existingProduct) {
+          return res.status(400).send({ message: "Product already exists" });
+        }
+  
+        const productChoose = new ProductChoose({
+          idProduct: idProduct,
+        });
+  
+        productChoose.save((err, productChoose) => {
+          if (err) {
+            return res.status(500).send({ message: err });
+          }
+  
+          res.send({ message: "Product was chosen successfully", productChoose });
+        });
+      });
+    });
+  };
+  
+  
