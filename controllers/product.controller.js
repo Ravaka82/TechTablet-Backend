@@ -73,4 +73,49 @@ exports.deleteProductChoice = (req, res) => {//supprimer  produits selectionner
     .catch((err) => {
         res.status(500).send({ message: "Error deleting product" });
     });
-  };
+}
+exports.findProductsSelected = async (req, res) => {
+  const { id } = req.params;
+  const url = `https://dev.techtablet.fr/apiv2/products/10?column=name,pricettc,pictures,color.name,stock.available`;
+
+  try {
+    // Récupère tous les idProduct dans la base de données
+    const products = await ProductChoose.find({});
+    
+    // Vérifie si l'un des idProduct correspond à l'ID dans l'URL
+    for (let i = 0; i < products.length; i++) {
+      if (products[i].idProduct === 10) {
+        // Si un produit correspond, récupère les détails du produit à partir de l'URL
+        const response = await axios.get(url);
+        const productDetails = response.data;
+        
+        // Renvoie les détails du produit
+        return res.json(productDetails);
+      }
+    }
+
+    // Si aucun produit ne correspond, renvoie une erreur
+    return res.status(404).json({ message: "Product not found" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+exports.findProductsSelected = async (req, res) => {
+  const dataProduct = [];
+  maxid = 16744;
+   const dbIds = await ProductChoose.find({}, "idProduct");
+  for (const dbId of dbIds) {
+    for (let index = 0; index <= maxid; index++) {
+      if(dbId['idProduct'] == index){
+        const url = `https://dev.techtablet.fr/apiv2/products/${index}?column=name,pricettc,pictures,color,stock`;
+        const response = await axios.get(url);
+        const productDetails = response.data;
+        dataProduct.push(productDetails);
+      }  
+    }
+  }
+  console.log(dataProduct)
+  res.send(dataProduct);
+};
