@@ -111,3 +111,22 @@ exports.getHistoriqueCommandes = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+exports.detailCommande = async (req, res) => {
+  try {
+    const utilisateurId = req.params.utilisateurId;
+    const commandes = await commande.find({
+      utilisateur: utilisateurId,
+      status: true
+    }).select("name price quantite image");
+
+    if (!commandes || commandes.length === 0) {
+      return res.status(404).send({ message: "Aucune commande trouvée" });
+    }
+
+    res.send(commandes);
+
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+

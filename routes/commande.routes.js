@@ -4,4 +4,5 @@ module.exports = function(app) {
     app.get("/api/product/findCommandeById/:utilisateurId",controller.findCommandeById);
     app.post("/api/product/findAndUpdateCommands/:utilisateurId",controller.findAndUpdateCommands);
     app.get("/api/product/getHistoriqueCommandes",controller.getHistoriqueCommandes);
+    app.get("/api/product/detailCommande/:utilisateurId",controller.detailCommande);
 }
