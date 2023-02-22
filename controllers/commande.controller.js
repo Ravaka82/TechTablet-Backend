@@ -56,7 +56,7 @@ exports.createCommande = async(req, res) => { // insertion commande d'un utilisa
 exports.findCommandeById = async (req, res) => {
   try {
     const utilisateurId = req.params.utilisateurId;
-    const commandes = await commande.find({utilisateur: utilisateurId }).populate('utilisateur');
+    const commandes = await commande.find({ utilisateur: utilisateurId, status: false }).populate('utilisateur');
     console.log(commandes)
     if (!commandes || commandes.length === 0) {
       return res.status(404).send({ message: "Aucune commande trouvée pour cet utilisateur" });
@@ -68,6 +68,7 @@ exports.findCommandeById = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
 exports.findAndUpdateCommands = async (req, res) => {
   try {
     const utilisateurId = req.params.utilisateurId;
@@ -86,6 +87,26 @@ exports.findAndUpdateCommands = async (req, res) => {
     }));
 
     res.send(updatedCommands);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+exports.getHistoriqueCommandes = async (req, res) => {
+  try {
+    const commandes = await commande.aggregate([
+      { $match: { status: true } },
+      { $group: { _id: "$utilisateur", totalQuantite: { $sum: "$quantite" }} },
+      { $lookup: { from: "utilisateurs", localField: "_id", foreignField: "_id", as: "utilisateur" } },
+      { $unwind: "$utilisateur" },
+      { $project: { "utilisateur._id": 1, "utilisateur.nom": 1, "utilisateur.prenom": 1, totalQuantite: 1, "utilisateur.totalpayer": 1} }
+    ]);
+    console.log(commandes)
+    if (!commandes || commandes.length === 0) {
+      return res.status(404).send({ message: "Aucune commande trouvée" });
+    }
+
+    res.send(commandes);
+
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

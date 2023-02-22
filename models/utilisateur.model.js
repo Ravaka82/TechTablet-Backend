@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const Utilisateur = mongoose.model(
   "Utilisateur",
   new mongoose.Schema({
@@ -13,9 +12,8 @@ const Utilisateur = mongoose.model(
         ref: "Role"
       }
     ],
-    totalpayer: {String, default:""},
-    lieu_livraison: {String, default:""}
+    totalpayer: {type:String,default:" "},
+    lieu_livraison: {type:String,default:" "}
   })
 );
-
 module.exports = Utilisateur;
