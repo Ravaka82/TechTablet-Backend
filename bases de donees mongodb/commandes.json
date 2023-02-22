@@ -1,0 +1,48 @@
+[{
+  "_id": {
+    "$oid": "63f616da584801ff956802b3"
+  },
+  "idProduct": "16743",
+  "name": "Etui Portefeuille Zanae pour  Galaxy A02  /  A32 5G /  A52s 5G, Black",
+  "color": "black",
+  "quantite": 3,
+  "price": {
+    "$numberDecimal": "19.90"
+  },
+  "status": false,
+  "image": "https://dev.techtablet.fr/pic/thumbnails/1/6/7/4/3/1.jpg",
+  "utilisateur": {
+    "$oid": "63d80033e96577dcb29ae6ee"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63f622019c1a903f27a6e31e"
+  },
+  "idProduct": "16697",
+  "name": "Etui Portefeuille Zanae pour TCL 30 / TCL 30 5G/TCL30+, Noir",
+  "color": "black",
+  "quantite": 4,
+  "price": "19.90",
+  "status": false,
+  "image": "https://dev.techtablet.fr/pic/thumbnails/1/6/6/9/7/1.jpg",
+  "utilisateur": {
+    "$oid": "63d80033e96577dcb29ae6ee"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63f6284c9c1a903f27a6e33d"
+  },
+  "idProduct": "12",
+  "name": "Galaxy Tab 2 (7.0\")",
+  "color": "",
+  "quantite": 3,
+  "price": "210.70",
+  "status": false,
+  "image": "https://dev.techtablet.fr/pic/thumbnails/1/2/1.jpg",
+  "utilisateur": {
+    "$oid": "63d80033e96577dcb29ae6ee"
+  },
+  "__v": 0
+}]

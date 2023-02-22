@@ -1,0 +1,40 @@
+[{
+  "_id": {
+    "$oid": "63cfb883df3a0d383235b8a0"
+  },
+  "nom": "administrateur",
+  "email": "admin@gmail.com",
+  "mot_de_passe": "$2a$08$S7axV./bwFdPAZdi7bJaHuMOZoGhXmCdhzWVqr/qESA8H5Ww2Q1Fm",
+  "roles": [
+    {
+      "$oid": "63f43784f3ceef72a3f828a6"
+    }
+  ],
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "63d80033e96577dcb29ae6ee"
+  },
+  "nom": "Utilisateur",
+  "email": "Utilisateur@gmail.com",
+  "mot_de_passe": "$2a$08$tO5qHzZB3we5r.xASH2xCumD3DRloXnrCzt5XePG6SJbjhVho2pC.",
+  "roles": [
+    {
+      "$oid": "63f43784f3ceef72a3f828a5"
+    }
+  ],
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "63f60fa524d9bca85c5b8e58"
+  },
+  "nom": "Utilisateur2",
+  "email": "Utilisateur2@gmail.com",
+  "mot_de_passe": "$2a$08$Le7UMoFSIB5TcJdtGJ2GF.p5p9YwE2zOESrAb41DLsUfbPtxOa8Vi",
+  "roles": [
+    {
+      "$oid": "63f43784f3ceef72a3f828a5"
+    }
+  ],
+  "__v": 1
+}]
