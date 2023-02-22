@@ -17,4 +17,5 @@ module.exports = function(app) {
     [authJwt.verifyToken, authJwt.isResponsableAtelier],
     controller.responsableAtelierBoard
   );
+  app.post("/api/utilisateur/updateAddress/:utilisateurId", controller.updateUtilisateurAddress);
 };

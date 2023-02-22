@@ -21,3 +21,24 @@
       res.status(500).send({ message: error.message });
     }
   };
+  exports.updateUtilisateurAddress = async (req, res) => {
+    try {
+      const utilisateurId = req.params.utilisateurId;
+      const newAddress = req.body.lieu_livraison;
+      const totalPayer = req.body.totalpayer
+  
+      const updatedUtilisateur = await utilisateur.updateOne(
+        { _id: utilisateurId },
+        { $set: { lieu_livraison: newAddress,  totalpayer: totalPayer } },
+      );
+  
+      if (!updatedUtilisateur || updatedUtilisateur.nModified === 0) {
+        return res.status(404).send({ message: "Utilisateur non trouvé" });
+      }
+  
+      res.send({ message: "Adresse livraison mise à jour avec succès" });
+  
+    } catch (error) {
+      res.status(500).send({ message: error.message });
+    }
+  };
