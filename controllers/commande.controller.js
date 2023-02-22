@@ -37,6 +37,7 @@ exports.createCommande = async(req, res) => { // insertion commande d'un utilisa
             quantite:req.body.quantite,
             price:req.body.price,
             status:req.body.status,
+            image:req.body.image,
             utilisateur: utilisateurId
         });
         commandes.save((err, commandes) => {
@@ -48,6 +49,21 @@ exports.createCommande = async(req, res) => { // insertion commande d'un utilisa
         });
       });
     }
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+exports.findCommandeById = async (req, res) => {
+  try {
+    const utilisateurId = req.params.utilisateurId;
+    const commandes = await commande.find({utilisateur: utilisateurId }).populate('utilisateur');
+    console.log(commandes)
+    if (!commandes || commandes.length === 0) {
+      return res.status(404).send({ message: "Aucune commande trouvée pour cet utilisateur" });
+    }
+
+    res.send(commandes);
+
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

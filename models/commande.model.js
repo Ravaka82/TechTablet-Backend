@@ -7,8 +7,9 @@ const Commande = mongoose.model(
       name : {type:String},
       color:{type: String},
       quantite:{type:Number},
-      price:{type: mongoose.Types.Decimal128},
+      price:{type: String},
       status:{type:Boolean,default:false},
+      image:{type:String},
       utilisateur: { type: mongoose.Schema.Types.ObjectId, ref: 'Utilisateur' }
     })
 );
