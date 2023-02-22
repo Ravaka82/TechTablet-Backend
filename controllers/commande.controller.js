@@ -68,3 +68,25 @@ exports.findCommandeById = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+exports.findAndUpdateCommands = async (req, res) => {
+  try {
+    const utilisateurId = req.params.utilisateurId;
+    const commandes = await commande.find({ utilisateur: utilisateurId }).populate('utilisateur');
+    console.log(commandes);
+    if (!commandes || commandes.length === 0) {
+      return res.status(404).send({ message: "Aucune commande trouvée pour cet utilisateur" });
+    }
+
+    const updatedCommands = await Promise.all(commandes.map(async (commande) => {
+      if (!commande.status) {
+        commande.status = true;
+        await commande.save();
+      }
+      return commande;
+    }));
+
+    res.send(updatedCommands);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};

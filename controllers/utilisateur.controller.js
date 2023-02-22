@@ -1,3 +1,5 @@
+  
+  const { utilisateur } = require("../models");
   exports.clientBoard = (req, res) => {
     res.status(200).send("Contenu client");
   };
