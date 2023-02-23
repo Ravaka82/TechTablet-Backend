@@ -10,7 +10,8 @@
       "$oid": "63f43784f3ceef72a3f828a6"
     }
   ],
-  "__v": 1
+  "__v": 1,
+  "prenom": "admin"
 },{
   "_id": {
     "$oid": "63d80033e96577dcb29ae6ee"
@@ -23,18 +24,24 @@
       "$oid": "63f43784f3ceef72a3f828a5"
     }
   ],
-  "__v": 1
+  "__v": 1,
+  "prenom": "User",
+  "lieu_livraison": "",
+  "totalpayer": ""
 },{
   "_id": {
-    "$oid": "63f60fa524d9bca85c5b8e58"
+    "$oid": "63f6956489e0fe378782955f"
   },
-  "nom": "Utilisateur2",
-  "email": "Utilisateur2@gmail.com",
-  "mot_de_passe": "$2a$08$Le7UMoFSIB5TcJdtGJ2GF.p5p9YwE2zOESrAb41DLsUfbPtxOa8Vi",
+  "nom": "Utilisateur4",
+  "prenom": "User",
+  "email": "raka@gmail.com",
+  "mot_de_passe": "$2a$08$t1jkKyKAz8wtNlU9h6ZJV.bwgDXTIruryFZcMvlZgMwL66XODQTIm",
   "roles": [
     {
       "$oid": "63f43784f3ceef72a3f828a5"
     }
   ],
+  "totalpayer": "",
+  "lieu_livraison": "",
   "__v": 1
 }]
