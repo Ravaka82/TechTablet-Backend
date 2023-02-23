@@ -1,6 +1,8 @@
 const db = require("../models");
 const utilisateur = db.utilisateur;
 const commande = db.commande;
+const mongoose = require('mongoose');
+
 exports.createCommande = async(req, res) => { // insertion commande d'un utilisateur
   try {
     const utilisateurId = req.body.utilisateurId;
@@ -121,6 +123,28 @@ exports.detailCommande = async (req, res) => {
 
     if (!commandes || commandes.length === 0) {
       return res.status(404).send({ message: "Aucune commande trouvée" });
+    }
+
+    res.send(commandes);
+
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+exports.getHistoriqueCommandesById = async (req, res) => {
+  try {
+    const utilisateurId = req.params.utilisateurId;
+    const commandes = await commande.aggregate([
+      { $match: { utilisateur: mongoose.Types.ObjectId(utilisateurId), status: true } },
+      { $group: { _id: "$utilisateur", totalQuantite: { $sum: "$quantite" } } },
+      { $lookup: { from: "utilisateurs", localField: "_id", foreignField: "_id", as: "utilisateur" } },
+      { $unwind: "$utilisateur" },
+      { $project: { "utilisateur._id": 1, "utilisateur.nom": 1, "utilisateur.prenom": 1, totalQuantite: 1, "utilisateur.totalpayer": 1 } }
+    ]);
+    console.log(commandes)
+
+    if (!commandes || commandes.length === 0) {
+      return res.status(404).send({ message: "Aucune commande trouvée pour cet utilisateur" });
     }
 
     res.send(commandes);
